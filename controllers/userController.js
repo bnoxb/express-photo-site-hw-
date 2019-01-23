@@ -13,7 +13,7 @@ router.get('/', (req, res)=>{
 
 router.get('/new', (req, res)=>{
     res.render('./user/new.ejs');
-})
+});
 
 router.post('/', (req, res)=>{
     Users.create(req.body, (err, author)=>{
@@ -60,4 +60,15 @@ router.put('/:id', (req, res)=>{
         }
     })
 })
+
+router.delete('/:id', (req, res)=>{
+    Users.findByIdAndRemove(req.params.id, (err, user)=>{
+        if(err){
+            res.send(err);
+        } else {
+            console.log(user);
+            res.redirect('/users');
+        }
+    });
+});
 module.exports = router;

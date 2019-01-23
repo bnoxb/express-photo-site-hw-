@@ -17,7 +17,10 @@
         <ul>
             <%for(let i = 0; i < users.length; i++){%>
             <li><a href="/users/<%=users[i]._id%>"><%=users[i].name%></a></li>
-            
+            <form action="users/<%=users[i]._id%>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+            <a href="/users/<%=users[i]._id%>/edit"><button type="submit">Edit</button></a>
             <%}%>
         </ul>
         <section>

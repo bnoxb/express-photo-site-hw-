@@ -20,6 +20,9 @@
             <input type="text" name="password" value="<%=user.password%>">
             <button type="submit">Update User</button>
         </form>
+        <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
     </main>
 </body>
 </html>
