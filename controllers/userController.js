@@ -24,7 +24,40 @@ router.post('/', (req, res)=>{
             res.redirect('/users');
         }
         
+    });
+});
+
+router.get('/:id', (req, res)=>{
+    Users.findById(req.params.id, (err, user)=>{
+        if(err){
+            res.send(err);
+        }else {
+            res.render('./user/show.ejs',{
+                user: user
+            });
+        }
+    });
+});
+
+router.get('/:id/edit', (req, res)=>{
+    Users.findById(req.params.id, (err, user)=>{
+        if(err){
+            res.send(err);
+        } else {
+            res.render('./user/edit.ejs', {
+                user: user
+            });
+        }
+    });
+});
+
+router.put('/:id', (req, res)=>{
+    Users.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user)=>{
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect('/users');
+        }
     })
 })
-
 module.exports = router;
