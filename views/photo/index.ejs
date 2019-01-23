@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+   
+</head>
+<body>
+    <header>
+        <h1>Photos</h1>
+        <h2>A place for photographers to put photos</h2>
+        <a href="/"><button type="submit">Home</button></a>
+        <a href="/photos/new"><button type="submit">Add New Photo</button></a>
+    </header>
+    <%for(let i = 0; i < photos.length; i++){%>
+    <a href="/photos/<%=photos[i]._id%>"><img src="<%=photos[i].url%>"></a>
+    <%}%>
+</body>
+</html>
