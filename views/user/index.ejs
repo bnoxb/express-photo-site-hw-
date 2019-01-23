@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+
+</head>
+<body>
+    <header>
+        <h1>Users</h1>
+    </header>
+    <main>
+        <ul>
+            <%for(let i = 0; i < users.length; i++){%>
+            <li><a href="/users/<%=users[i]._id%>"><%=users[i].name%></a></li>
+            
+            <%}%>
+        </ul>
+        <section>
+            <a href="/users/new"><button type="submit">Create New User</button></a>
+        </section>
+    </main>
+</body>
+</html>
