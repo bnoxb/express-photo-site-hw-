@@ -36,4 +36,37 @@ router.get('/:id', (req, res)=>{
         }
     })
 })
+
+router.get('/:id/edit', (req, res)=>{
+    Photos.findById(req.params.id, (err, photo)=>{
+        if(err){
+            res.send(err);
+        } else {
+            res.render('./photo/edit.ejs',{
+                photo: photo
+            });
+        }
+    });
+});
+
+router.put('/:id', (req, res)=>{
+    Photos.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, photo)=>{
+        if(err){
+            res.send(err);
+        } else {
+            console.log(photo);
+            res.redirect(`/photos/` + req.params.id);
+        }
+    });
+});
+
+router.delete('/:id', (req, res)=>{
+    Photos.findByIdAndRemove(req.params.id, (err, removedPhoto)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.redirect('/photos');
+        }
+    })
+})
 module.exports = router;
