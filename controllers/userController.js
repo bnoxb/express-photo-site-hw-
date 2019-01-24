@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../models/User');
+const Photos = require('../models/Photo');
 
 // display all the users in a list
 router.get('/', (req, res)=>{
@@ -40,12 +41,13 @@ router.get('/:id', (req, res)=>{
 });
 
 router.get('/:id/edit', (req, res)=>{
-    Users.findById(req.params.id, (err, user)=>{
+    Users.findById(req.params.id, (err, foundUser)=>{
         if(err){
             res.send(err);
         } else {
+            console.log('found user ' + foundUser);
             res.render('./user/edit.ejs', {
-                user: user
+                user: foundUser
             });
         }
     });
@@ -66,9 +68,16 @@ router.delete('/:id', (req, res)=>{
         if(err){
             res.send(err);
         } else {
-            console.log(user);
-            res.redirect('/users');
+            const photoIds = [];
+            for (let i = 0; i < user.images.length; i++){
+                photoIds.push(user.images[i]._id);
+            }
+            Photos.deleteMany({_id: {$in: photoIds}}, (err, data)=>{
+                console.log(user);
+                res.redirect('/users');
+            });
         }
     });
 });
+
 module.exports = router;

@@ -11,9 +11,29 @@
 <body>
     <header>
         <h1><%=user.name%></h1>
+        <a href="/"><button type="submit">Home</button></a>
+        <a href="/users/<%=user._id%>/edit"><button type="submit">Edit User</button></a>
+        <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete User</button>
+        </form>
     </header>
-    <a href="/"><button type="submit">Home</button></a>
-    <a href="/users/<%=user._id%>/edit"><button type="submit">Edit</button></a>
     
+    <main>
+        <section>
+            <ul>
+                <% for (let i = 0; i < user.images.length; i++){ %>
+                    <li><h2><%=user.images[i].title%></h2><br/>
+                    <a href="/photos/<%=user.images[i]._id%>"></a>
+                    <img src="<%=user.images[i].url%>"><br/>
+                    <a href="/photos/<%=user.images[i]._id%>/edit"><button type="submit">Edit Photo</button></a><br/>
+                    <form action="/photos/<%=user.images[i]._id%>?_method=DELETE" method="POST">
+                        <button type="submit">Delete Photo</button>
+                    </form>
+                </li>
+                <% } %>  
+            </ul>
+            
+        </section>
+    </main>
 </body>
 </html>
